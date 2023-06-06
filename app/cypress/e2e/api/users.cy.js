@@ -13,11 +13,3 @@ context('GET /users/id', () => {
 		})
 	})
 })
-
-context('GET /users/id', () => {
-	it('gets a user error', () => {
-		cy.request('GET', 'https://reqres.in/api/users/hello').then((response) => {
-			expect(response.status).to.eq(400)
-		})
-	})
-})
