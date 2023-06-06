@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-export default async function User({params}) {
+export default function User({params}) {
     const [user, setUser] = useState({})
 
     useEffect(() => {
@@ -10,9 +10,9 @@ export default async function User({params}) {
             window.location.href = '/'
         }
 
-        fetch('https://reqres.in/api/users/${params.id}')
-        .then(res => res.json())
-        .then(({data}) => setUser(data))
+        fetch(`https://reqres.in/api/users/${params.id}`)
+            .then(res => res.json())
+            .then(({data}) => setUser(data))
     }, [])
 
 	return (
