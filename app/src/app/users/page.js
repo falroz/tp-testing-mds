@@ -15,10 +15,15 @@ export default function Users() {
         .then(({data}) => setUsers(data))
     }, [])
 
+    const disconnect = () => {
+        localStorage.removeItem('token')
+        window.location.href = '/'
+    }
+
 	return (
         <main className="flex min-h-screen flex-col items-center justify-between p-24">
             <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 ">
-                <a href="/" className="float-right text-blue-500 hover:text-blue-700">Déconnection</a>
+                <a href="#" onClick={disconnect} className="float-right text-blue-500 hover:text-blue-700">Déconnection</a>
                 <div className="mt-8 mx-auto max-w-screen-sm text-center mb-8 lg:mb-16">
                     <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Liste des utilisateurs</h2>
                     <p className="font-light text-gray-500 lg:mb-16 sm:text-xl dark:text-gray-400">Notre super liste d'utilisateur provenant de l'api <a href="https://reqres.in" target="_blank">reqres.in</a></p>
