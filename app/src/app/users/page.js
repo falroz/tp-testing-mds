@@ -1,8 +1,19 @@
+'use client';
 
-export default async function Users() {
+import { useEffect, useState } from "react";
 
-    const res = await fetch('https://reqres.in/api/users')
-    const users = await res.json();
+export default function Users() {
+    const [users, setUsers] = useState([])
+
+    useEffect(() => {
+        if (!localStorage.getItem('token')) {
+            return window.location.href = '/'
+        }
+
+        fetch('https://reqres.in/api/users')
+        .then(res => res.json())
+        .then(({data}) => setUsers(data))
+    }, [])
 
 	return (
         <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -13,8 +24,8 @@ export default async function Users() {
                     <p className="font-light text-gray-500 lg:mb-16 sm:text-xl dark:text-gray-400">Notre super liste d'utilisateur provenant de l'api <a href="https://reqres.in" target="_blank">reqres.in</a></p>
                 </div> 
                 <div className="grid gap-8 mb-6 lg:mb-16 md:grid-cols-2">
-                    {users.data.map((user) => (
-                        <div className="items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700">
+                    {users.map((user) => (
+                        <div key={user.id} className="items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700">
                             <a href={`/users/${user.id}`}>
                                 <img className="w-full rounded-lg sm:rounded-none sm:rounded-l-lg" src={user.avatar} alt="Bonnie Avatar" />
                             </a>
